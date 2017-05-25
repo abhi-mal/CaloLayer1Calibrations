@@ -47,7 +47,7 @@
 
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
-#include "L1Trigger/LauraTriggerTools/interface/helpers.h"
+#include "L1Trigger/CaloL1-Calibrations/interface/helpers.h"
 
 
 #include "TH1D.h"

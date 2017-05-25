@@ -15,7 +15,7 @@
 #include "CommonTools/Utils/interface/TFileDirectory.h"
 #include "TTree.h"
 
-#include "L1Trigger/LauraTriggerTools/interface/ExpressionNtupleColumn.h"
+#include "L1Trigger/CaloL1-Calibrations/interface/ExpressionNtupleColumn.h"
 
 // so we don't conflict with FinalStateAnalysis
 namespace uct {
