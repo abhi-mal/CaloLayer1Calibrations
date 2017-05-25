@@ -173,10 +173,9 @@ PionCalibrations::PionCalibrations(const edm::ParameterSet& config) :
 	hTowerETCode(N_TOWER_PHI, vector<unsigned int>(N_TOWER_ETA)),
 	hCorrTowerETCode(N_TOWER_PHI, vector<unsigned int>(N_TOWER_ETA))
 {
-	std::cout<<"Starting PionCalibrations constructor"<<std::endl;
 	edm::Service<TFileService> fs;
 
-	std::cout<<"Making Htps_"<<std::endl;
+
 	Htps_ = fs->make<TTree>("Htps", "Trigger primitives");
 	Htps_->Branch("event", &event_);
 	Htps_->Branch("ieta", &tp_ieta_);
@@ -188,7 +187,7 @@ PionCalibrations::PionCalibrations(const edm::ParameterSet& config) :
 	Htps_->Branch("soi", &tp_soi_);
 	Htps_->Branch("et", &tp_et_);
 
-	std::cout<<"Making Etps_"<<std::endl;
+
 	Etps_ = fs->make<TTree>("Etps", "Trigger primitives");
 	Etps_->Branch("event", &event_);
 	Etps_->Branch("ieta", &etp_ieta_);
@@ -196,7 +195,7 @@ PionCalibrations::PionCalibrations(const edm::ParameterSet& config) :
 	Etps_->Branch("phi", &etp_phi_);
 	Etps_->Branch("eta", &etp_eta_);
 	Etps_->Branch("et", &etp_et_);
-	std::cout<<"Making pions_"<<std::endl;
+
 	pions_ = fs->make<TTree>("pions", "Pion quantities");
 	pions_->Branch("event", &event_);
 	pions_->Branch("et" , &pion_et_);
@@ -205,7 +204,7 @@ PionCalibrations::PionCalibrations(const edm::ParameterSet& config) :
 	pions_->Branch("phi" , &pion_phi_);
 	pions_->Branch("ieta" , &pion_ieta_);
 	pions_->Branch("iphi" , &pion_iphi_);
-	std::cout<<"Making matched_"<<std::endl;
+
 	matched_ = fs->make<TTree>("matched", "Matched quantities");
 	matched_->Branch("event", &event_);
 	matched_->Branch("gen_pt" , &gen_pt_);
@@ -232,7 +231,7 @@ PionCalibrations::PionCalibrations(const edm::ParameterSet& config) :
 	matched_->Branch("sumCorr" , &sumCorr_);
 	matched_->Branch("sumCorr_e" , &sumCorr_e_);
 	matched_->Branch("sumCorr_h" , &sumCorr_h_); //corrH is defined to be hcalSF*(uncorrH+corrE)-corrE
-	std::cout<<"Finished constructor"<<std::endl;
+
 }
 
 PionCalibrations::~PionCalibrations() {}
@@ -240,37 +239,29 @@ PionCalibrations::~PionCalibrations() {}
 	void
 PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 {
-	std::cout<<"Beginning analyze"<<std::endl;
+
 	event_ = event.id().event();
-	std::cout<<"Got event"<<std::endl;
 
 	Handle<HcalTrigPrimDigiCollection> digis;
-	std::cout<<"Getting HCAL digis."<<std::endl;
 	if (!event.getByToken(digis_, digis)) {
-		//DEBUG
-		std::cout<<"Can't find hcal trigger primitive digi collection"<<std::endl;
 		LogError("PionCalibrations") <<
 			"Can't find hcal trigger primitive digi collection"<<std::endl;
 		return;
 	}
-	std::cout<<"HCAL digis got."<<std::endl;
+
 	Handle<EcalTrigPrimDigiCollection> Edigis;
-	std::cout<<"Getting ECAL digis."<<std::endl;
 	if (!event.getByToken(Edigis_, Edigis)) {
 		LogError("PionCalibrations") <<
 			"Can't find ecal trigger primitive digi collection" << std::endl;
 		return;
 	}
-	std::cout<<"ECAL digis got."<<std::endl;
 
 	edm::Handle<std::vector<reco::GenParticle> > objects;
-	std::cout<<"Getting gen particles."<<std::endl;
 	if (!event.getByToken(genSrc_, objects)) {
 		LogError("PionCalibrations") <<
 			"Can't find genParticle collection" << std::endl;
 		return;
 	}
-	std::cout<<"Gen particles got."<<std::endl;
 
 	for(const auto& pion: *objects){
 		pion_et_=pion.et();
@@ -281,7 +272,6 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 		pion_iphi_=convertGenPhi(pion.phi());
 		pions_->Fill();
 	}
-	std::cout<<"Pion info filled."<<std::endl;
 
 	ESHandle<CaloTPGTranscoder> decoder;
 	setup.get<CaloTPGRecord>().get(decoder);
@@ -292,24 +282,17 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 
 	ESHandle<HcalTrigTowerGeometry> tpd_geo;
 	setup.get<CaloGeometryRecord>().get(tpd_geo);
-	
-	//DEBUG
-	int nHCALdigis_examined = 0;
-	double sum_tp_et_ = 0.0;
-	double max_tp_et_ = 0.0;
-	int max_tp_et_iphi = -999;
-	int max_tp_et_ieta = -999;
-	
+
 	for (unsigned int i = 0; i < hTowerETCode.size(); i++)
 	{
 		hTowerETCode[i].clear();
+	}
+	for (unsigned int i = 0; i < hCorrTowerETCode.size(); i++)
+	{
 		hCorrTowerETCode[i].clear();
 	}
-	
 	std::map<HcalTrigTowerDetId, HcalTriggerPrimitiveDigi> ttids;
 	for (const auto& digi: *digis) {
-		// DEBUG
-		nHCALdigis_examined += 1;
 		//	if (digi.id().version() == 1 || digi.id().ieta()>29) continue; //No HF
 		ttids[digi.id()] = digi;
 		HcalTrigTowerDetId id = digi.id();
@@ -328,14 +311,6 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 		tp_version_ = id.version();
 		tp_soi_ = digi.SOI_compressedEt();
                 hTowerETCode[iphi][ieta] = tp_et_*2; //add "uncompressed et" e.g. divide this by two later for 0.5 GeV precision 
-                //DEBUG
-                sum_tp_et_ += tp_et_;
-                if(tp_et_ > max_tp_et_)
-                {
-                	max_tp_et_ = tp_et_;
-                	max_tp_et_iphi = iphi;
-                	max_tp_et_ieta = ieta;
-                }
                 // hCorrTowerETCode[iphi][ieta] = tp_et_*2; //add "uncompressed et" e.g. divide this by two later for 0.5 GeV precision 
                 
                 //Make a first pass at filling hCorrTowerETCode, in case nothing is found in ECAL
@@ -364,15 +339,12 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 
 	}//end for of hcal digis
 	
-	//DEBUG
-	std::cout<<"-----------------------"<<endl;
-	std::cout<<"nHCALdigis_examined = "<<nHCALdigis_examined<<std::endl;
-	std::cout<<"sum_tp_et_ = "<<sum_tp_et_<<std::endl;
-	std::cout<<"max_tp_et_ = "<<max_tp_et_<<", iphi = "<<max_tp_et_iphi<<", ieta = "<<max_tp_et_ieta<<std::endl;
-		
 	for (unsigned int i = 0; i < eTowerETCode.size(); i++)
 	{
 		eTowerETCode[i].clear();
+	}
+	for (unsigned int i = 0; i < eCorrTowerETCode.size(); i++)
+	{
 		eCorrTowerETCode[i].clear();
 	}
 	for (const auto& Edigi: *Edigis) {
@@ -444,7 +416,7 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 		gen_ieta_=convertTPGGenEta(pion.eta());
 		//cout<<"iEta: "<<gen_ieta_<<endl; 
 		gen_iphi_=convertGenPhi(pion.phi());
-		cout<<"GenParticle Pt: "<< gen_pt_ <<" Eta: "<<gen_eta_<<" Phi: "<<gen_phi_<<" iEta: "<<gen_ieta_<<" iPhi: "<<gen_iphi_ <<endl;
+		//cout<<"GenParticle Pt: "<< gen_pt_ <<" Eta: "<<gen_eta_<<" Phi: "<<gen_phi_<<" iEta: "<<gen_ieta_<<" iPhi: "<<gen_iphi_ <<endl;
                 //iETA NEGATIVE
 		// ETbin_=0;
 		double TPGhCenter_=0;
@@ -513,8 +485,6 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 	
 		//LSB = 0.5 
 		l1_center_h_=TPGhCenter_*0.5;
-		// DEBUG
-		std::cout<<"l1_center_h_ = "<<l1_center_h_<<std::endl;
 		corr_center_h_=cTPGhCenter_*0.5;
 		l1_center_e_=TPGeCenter_*0.5;
 		corr_center_e_=cTPGeCenter_*0.5;
