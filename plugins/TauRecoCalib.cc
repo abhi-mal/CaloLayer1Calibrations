@@ -11,8 +11,8 @@
  *
  * =====================================================================================
  */
-#include "L1Trigger/LauraTriggerTools/interface/ExpressionNtuple.h"
-#include "L1Trigger/LauraTriggerTools/interface/helpers.h"
+#include "L1Trigger/CaloL1-Calibrations/interface/ExpressionNtuple.h"
+#include "L1Trigger/CaloL1-Calibrations/interface/helpers.h"
 #include <unordered_map>
 #include <memory>
 #include <math.h>
