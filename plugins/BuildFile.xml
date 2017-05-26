@@ -19,8 +19,6 @@
 <use name="CommonTools/UtilAlgos"/>
 <use name="CondFormats/DataRecord"/>
 <use name="CondFormats/HcalObjects"/>
-<use name="DataFormats/HcalDetId"/>
-<use name="DataFormats/HcalDigi"/>
 <use name="DataFormats/HcalRecHit"/>
 <use name="Geometry/CaloGeometry"/>
 <use name="Geometry/HcalTowerAlgo"/>
@@ -32,7 +30,6 @@
 <use name="DataFormats/PatCandidates"/>
 <use name="DataFormats/TauReco"/>
 <use name="DataFormats/JetReco"/>
-<use name="CondFormats/DataRecord"/>
 <use name="boost"/>
 </library>
 
