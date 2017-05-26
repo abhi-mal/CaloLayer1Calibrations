@@ -9,7 +9,7 @@ fi
 
 farmoutAnalysisJobs $1 \
   --infer-cmssw-path \
-  --input-dbs-path=/SinglePhoton_FlatPt-0to200_13TeV_FlatRandomPtGun/PhaseISpring17DR-NoPUNZS_90X_upgrade2017_realistic_v20-v1/GEN-SIM-RAW \
+  --input-dbs-path=/SinglePhoton_FlatPt-0to200_13TeV_FlatRandomPtGun/NoPUHcalNZSRAW_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/GEN-SIM-RAW \
   --assume-input-files-exist \
   ./piMinus_submit_cfg.py  \
   'inputFiles=$inputFileNames' 'outputFile=$outputFileName'

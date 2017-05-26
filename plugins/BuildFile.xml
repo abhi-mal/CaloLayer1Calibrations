@@ -1,6 +1,6 @@
-<library   file="*.cc" name="CaloL1-CalibrationsPlugins">
+<library   file="*.cc" name="CaloLayer1CalibrationsPlugins">
 <flags EDM_PLUGIN="1"/>
-<use name="L1Trigger/CaloL1-Calibrations"/>
+<use name="L1Trigger/CaloLayer1Calibrations"/>
 <use name="FWCore/Framework"/>
 <use name="FWCore/Utilities"/>
 <use name="FWCore/PluginManager"/>

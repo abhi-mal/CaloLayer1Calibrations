@@ -47,7 +47,7 @@
 
 #include "DataFormats/JetReco/interface/GenJet.h"
 
-#include "L1Trigger/CaloL1-Calibrations/src/helpers.cc"
+#include "L1Trigger/CaloLayer1Calibrations/src/helpers.cc"
 
 
 #include "TH1D.h"

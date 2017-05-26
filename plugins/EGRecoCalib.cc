@@ -11,8 +11,8 @@
  *
  * =====================================================================================
  */
-#include "L1Trigger/CaloL1-Calibrations/interface/ExpressionNtuple.h"
-#include "L1Trigger/CaloL1-Calibrations/interface/helpers.h"
+#include "L1Trigger/CaloLayer1Calibrations/interface/ExpressionNtuple.h"
+#include "L1Trigger/CaloLayer1Calibrations/interface/helpers.h"
 #include <memory>
 #include <math.h>
 #include <vector>
