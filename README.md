@@ -6,6 +6,6 @@ git cms-init
 git cms-merge-topic 18869  
 git cms-addpkg L1Trigger/L1TCalorimeter  
 cd L1Trigger  
-git clone -b 920_v0 https://github.com/jjbuchanan/CaloL1-Calibrations.git  
+git clone -b 920_v0 https://github.com/jjbuchanan/CaloLayer1Calibrations.git  
 cd ..  
 scram b -j 8  
