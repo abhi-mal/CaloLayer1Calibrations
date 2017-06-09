@@ -26,8 +26,7 @@ process.load('Configuration.Geometry.GeometryRecoDB_cff')
 
 process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring(
-'/store/mc/RunIIFall15DR76/SinglePion_PT0to200/GEN-SIM-RAW/25nsNoPUZsecalNzshcalRaw_76X_mcRun2_asymptotic_2016EcalTune_30fb_v1-v1/00000/00569947-3DD1-E511-8130-02163E012E6C.root'
-#'/store/mc/RunIIFall15DR76/SinglePiMinus_E1to1000_Eta5p2_13TeV_FlatRandom/GEN-SIM-RAW/25nsNoPUZsecalNzshcalRaw_76X_mcRun2_asymptotic_2016EcalTune_30fb_v1-v1/60000/105B3BC2-2BED-E511-A51F-008CFA56D6F4.root'
+'/store/mc/PhaseISpring17DR/SinglePion_PT0to200/GEN-SIM-RAW/NoPUNZS_90X_upgrade2017_realistic_v20_ext1-v1/100000/00C7D4EA-7B37-E711-BCCB-0CC47A0AD6F8.root'
         )
 )
 process.options   = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
