@@ -14,13 +14,13 @@ process.load('Configuration.EventContent.EventContent_cff') # New
 process.load('SimGeneral.MixingModule.mixNoPU_cfi') # New
 # process.load('Configuration.StandardSequences.SimL1EmulatorRepack_FullMC_cff') # New; results in error whereby 0 digis are in collections
 process.load('Configuration.StandardSequences.MagneticField_cff')
-# Alternative if needed:
+## Alternative if needed:
 # process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.RawToDigi_cff')
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
 process.load('Configuration.Geometry.GeometryRecoDB_cff')
-# Alternatives if needed:
+## Alternatives if needed:
 # process.load("Configuration.Geometry.GeometryExtended2017Reco_cff")
 # process.load("Configuration.Geometry.GeometryExtended2017Plan1Reco_cff")
 
@@ -35,19 +35,20 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 100
 
 ## GlobalTag
 from Configuration.AlCa.GlobalTag import GlobalTag
-# Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFrontierConditions
-process.GlobalTag = GlobalTag(process.GlobalTag,'90X_upgrade2017_realistic_v20','')
-# Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalLUTCorrsTags2009
+## Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFrontierConditions
+# process.GlobalTag = GlobalTag(process.GlobalTag,'90X_upgrade2017_realistic_v20','')
+process.GlobalTag = GlobalTag(process.GlobalTag,'92X_upgrade2017_TSG_For90XSamples_V1','')
+## Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalLUTCorrsTags2009
 process.GlobalTag.toGet = cms.VPSet(
   cms.PSet(record = cms.string("HcalLUTCorrsRcd"),
-           tag = cms.string("HcalLUTCorrs_2017plan1_v2.0_mc"),
+           tag = cms.string("HcalLUTCorrs_2017plan1_v2.0_mc"), # v2.0 has 0.7 factor removed from HF TPs; v1.0 does not
            connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
           )
 )
 
 ## To get the CaloTPGTranscoder, which decodes the HCAL compression LUT
 process.load("SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff")
-# From an email by Aleko: "For simulation you want LUTGenerationMode=True"
+## From an email by Aleko: "For simulation you want LUTGenerationMode=True"
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(True)
 
 from CondCore.DBCommon.CondDBSetup_cfi import *
@@ -74,6 +75,9 @@ process.TFileService = cms.Service("TFileService",
         fileName = cms.string('analyzePion.root')
 )
 
+## These choices of inputLabel and inputUpgradeLabel are already implicitly specified
+# process.simHcalTriggerPrimitiveDigis.inputLabel = cms.VInputTag(cms.InputTag('simHcalUnsuppressedDigis'), cms.InputTag('simHcalUnsuppressedDigis'))
+# process.simHcalTriggerPrimitiveDigis.inputUpgradeLabel = cms.VInputTag(cms.InputTag('simHcalUnsuppressedDigis:HBHEQIE11DigiCollection'), cms.InputTag('simHcalUnsuppressedDigis:HFQIE10DigiCollection'))
 process.tree = cms.EDAnalyzer("PionCalibrations",
         triggerPrimitives = cms.InputTag("simHcalTriggerPrimitiveDigis","","HFCALIB"),
         eTriggerPrimitives = cms.InputTag("ecalDigis:EcalTriggerPrimitives"),
