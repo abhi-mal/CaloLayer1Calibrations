@@ -8,7 +8,7 @@ import math
 
 if len(argv) != 6:
    print 'ERROR: Incorrect number of arguments provided'
-   print 'Usage: python computeECALcalibs_MC.py input<file or folder> suffix TPGVeto_cut start_index end_index_plus_1'
+   print 'Usage: python computeECALcalibs.py input<file or folder> suffix TPGVeto_cut start_index end_index_plus_1'
    exit(1)
 
 suffix = argv[2]
@@ -246,6 +246,12 @@ for infile_index in range(start_index,start_index+max_Nfiles):
       l1_summed55_e = event.l1_summed55_e
       l1_summed33_h = event.l1_summed33_h
       l1_summed55_h = event.l1_summed55_h
+      l1_corrCenter_h = event.corr_center_h
+      l1_corrCenter_e = event.corr_center_e
+      l1_sumCorr33_e = event.sumCorr33_e
+      l1_sumCorr55_e = event.sumCorr_e
+      l1_sumCorr33_h = event.sumCorr33_h
+      l1_sumCorr55_h = event.sumCorr_h
       ETbin = -1
       if l1_center_e >= 3 and l1_center_e < 15:
         ETbin = int(math.floor(l1_center_e/3)) - 1
@@ -266,13 +272,12 @@ for infile_index in range(start_index,start_index+max_Nfiles):
          foldedEtacounts[foldedEta] += 1
          TPGVeto3x3 = 0.0
          TPGVeto5x5 = 0.0
+         if foldedEta>=26 and foldedEta<28:
+             l1_center_e *= 2.0
          if l1_summed33_e > 3:
              TPGVeto3x3 = l1_center_e/l1_summed33_e
          if l1_summed55_e > 3:
              TPGVeto5x5 = l1_center_e/l1_summed55_e
-         if foldedEta>=26 and foldedEta<28:
-             TPGVeto3x3 *= 2
-             TPGVeto5x5 *= 2
          resolution_3x3 = (l1_summed33_e-gen)/gen
          resolution_5x5 = (l1_summed55_e-gen)/gen
          if TPGVeto3x3>TPGVeto_cut:
@@ -280,18 +285,18 @@ for infile_index in range(start_index,start_index+max_Nfiles):
             SF = gen/l1_summed33_e
             histos_resolution_3x3[ETbin].Fill(resolution_3x3)
             histos_genpt_3x3[ETbin].Fill(event.gen_pt)
-            histos_summed33e_3x3[ETbin].Fill(event.l1_summed33_e)
-            histos_summed55e_3x3[ETbin].Fill(event.l1_summed55_e)
+            histos_summed33e_3x3[ETbin].Fill(l1_summed33_e)
+            histos_summed55e_3x3[ETbin].Fill(l1_summed55_e)
             histos_isolation_eta_3x3[ETbin][eta].Fill(isolation)
             histos_scaleFactor_eta_3x3[ETbin][eta].Fill(SF)
             histos_isolation_eta_folded_3x3[ETbin][foldedEta].Fill(isolation)
             histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Fill(SF)
             histos_isolation_phi_3x3[ETbin][phi].Fill(isolation)
             histos_scaleFactor_phi_3x3[ETbin][phi].Fill(SF)
-            if eta < 17:
+            if foldedEta < 17:
               histos_isolation_phi_barrel_3x3[ETbin][phi].Fill(isolation)
               histos_scaleFactor_phi_barrel_3x3[ETbin][phi].Fill(SF)
-            elif eta > 17 and eta < 26:
+            elif foldedEta > 17 and foldedEta < 26:
               histos_isolation_phi_endcap_3x3[ETbin][phi].Fill(isolation)
               histos_scaleFactor_phi_endcap_3x3[ETbin][phi].Fill(SF)
          if TPGVeto5x5>TPGVeto_cut:
@@ -302,18 +307,18 @@ for infile_index in range(start_index,start_index+max_Nfiles):
             SF = gen/l1_summed55_e
             histos_resolution_5x5[ETbin].Fill(resolution_5x5)
             histos_genpt_5x5[ETbin].Fill(event.gen_pt)
-            histos_summed33e_5x5[ETbin].Fill(event.l1_summed33_e)
-            histos_summed55e_5x5[ETbin].Fill(event.l1_summed55_e)
+            histos_summed33e_5x5[ETbin].Fill(l1_summed33_e)
+            histos_summed55e_5x5[ETbin].Fill(l1_summed55_e)
             histos_isolation_phi_3x3[ETbin][phi].Fill(isolation)
             histos_scaleFactor_phi_5x5[ETbin][phi].Fill(SF)
             histos_isolation_eta_5x5[ETbin][eta].Fill(isolation)
             histos_scaleFactor_eta_5x5[ETbin][eta].Fill(SF)
             histos_isolation_eta_folded_5x5[ETbin][foldedEta].Fill(isolation)
             histos_scaleFactor_eta_folded_5x5[ETbin][foldedEta].Fill(SF)
-            if eta < 17:
+            if foldedEta < 17:
               histos_isolation_phi_barrel_5x5[ETbin][phi].Fill(isolation)
               histos_scaleFactor_phi_barrel_5x5[ETbin][phi].Fill(SF)
-            elif eta > 17 and eta < 26:
+            elif foldedEta > 17 and foldedEta < 26:
               histos_isolation_phi_endcap_5x5[ETbin][phi].Fill(isolation)
               histos_scaleFactor_phi_endcap_5x5[ETbin][phi].Fill(SF)
 
