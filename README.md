@@ -1,6 +1,6 @@
 # Setup instructions
-cmsrel CMSSW_9_2_0  
-cd CMSSW_9_2_0/src  
+cmsrel CMSSW_9_4_0_patch1  
+cd CMSSW_9_4_0_patch1/src  
 cmsenv  
 git cms-init  
 git cms-addpkg L1Trigger/L1TCalorimeter  
