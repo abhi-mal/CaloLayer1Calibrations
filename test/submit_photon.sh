@@ -9,7 +9,7 @@ fi
 
 farmoutAnalysisJobs $1 \
   --infer-cmssw-path \
-  --input-dbs-path=/SinglePhoton_FlatPt-0to200_13TeV_FlatRandomPtGun/RunIISummer17DRStdmix-NZSNoPU_92X_upgrade2017_realistic_v10-v2/GEN-SIM-RAW \
+  --input-dbs-path=/SinglePhoton_FlatPt-0to200_13TeV_FlatRandomPtGun/RunIISpring18DR-NZSNoPU_100X_upgrade2018_realistic_v10-v1/GEN-SIM-RAW \
   --assume-input-files-exist \
   --skip-existing-output \
   ./piMinus_submit_cfg.py  \

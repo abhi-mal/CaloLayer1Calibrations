@@ -4,7 +4,8 @@ import EventFilter.L1TXRawToDigi.util as util
 
 ## Define the process
 from Configuration.StandardSequences.Eras import eras
-process = cms.Process("HFCALIB",eras.Run2_2017)
+# Get era from https://github.com/cms-sw/cmssw/blob/master/Configuration/StandardSequences/python/Eras.py
+process = cms.Process("HFCALIB",eras.Run2_2018)
 
 ## Load all kinds of stuff
 process.load('Configuration.StandardSequences.Services_cff')
@@ -25,7 +26,7 @@ process.load('Configuration.Geometry.GeometryRecoDB_cff')
 
 process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring(
-'/store/mc/RunIISummer17DRStdmix/SinglePion_PT0to200/GEN-SIM-RAW/NZSNoPU_92X_upgrade2017_realistic_v10-v2/10000/004AC23F-DC9D-E711-8B11-0025904C6216.root'
+'/store/mc/RunIISpring18DR/SinglePhoton_FlatPt-0to200_13TeV_FlatRandomPtGun/GEN-SIM-RAW/NZSNoPU_100X_upgrade2018_realistic_v10-v1/100000/04441221-CE21-E811-AF39-A4BF01125810.root'
         )
 )
 process.options   = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
@@ -35,13 +36,13 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 100
 ## GlobalTag
 from Configuration.AlCa.GlobalTag import GlobalTag
 # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFrontierConditions
-process.GlobalTag = GlobalTag(process.GlobalTag,'92X_upgrade2017_realistic_v7','')
+process.GlobalTag = GlobalTag(process.GlobalTag,'100X_upgrade2018_realistic_v11','')
 # process.GlobalTag = GlobalTag(process.GlobalTag,'92X_upgrade2017_TSG_For90XSamples_V1','')
 # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalLUTCorrsTags2009
 process.GlobalTag.toGet = cms.VPSet(
   cms.PSet(record = cms.string("HcalLUTCorrsRcd"),
-           tag = cms.string("HcalLUTCorrs_2017plan1_v2.0_mc"),
-           # tag = cms.string("HcalLUTCorrs_2017plan1_v1.0_mc"),
+           tag = cms.string("HcalLUTCorrs_2018_v3.0_mc"),
+           # tag = cms.string("HcalLUTCorrs_2017plan1_v2.0_mc"),
            connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
           )
 )
@@ -58,11 +59,13 @@ process.es_pool = cms.ESSource("PoolDBESSource",
      toGet = cms.VPSet(
          cms.PSet(record = cms.string("HcalLutMetadataRcd"),
              # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalLutMetadataTags2011
-             tag = cms.string("HcalLutMetadata_2017plan1_v3.0_mc")
+             tag = cms.string("HcalLutMetadata_2018_v6.0_mc")
+             # tag = cms.string("HcalLutMetadata_2018_v4.0_mc")
              ),
          cms.PSet(record = cms.string("HcalElectronicsMapRcd"),
              # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalElectronicsMapTags2009
-             tag = cms.string("HcalElectronicsMap_2017plan1_v3.0_mc")
+             tag = cms.string("HcalElectronicsMap_2018_v3.0_mc")
+             # tag = cms.string("HcalElectronicsMap_2017plan1_v3.0_mc")
              )
          ),
      connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS'),

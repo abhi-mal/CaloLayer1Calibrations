@@ -4,7 +4,7 @@ import EventFilter.L1TXRawToDigi.util as util
 
 ## Define the process
 from Configuration.StandardSequences.Eras import eras
-process = cms.Process("HFCALIB",eras.Run2_2017)
+process = cms.Process("HFCALIB",eras.Run2_2018)
 
 ## Load all kinds of stuff
 process.load('Configuration.StandardSequences.Services_cff')
@@ -35,40 +35,42 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 100
 ## GlobalTag
 from Configuration.AlCa.GlobalTag import GlobalTag
 # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFrontierConditions
-process.GlobalTag = GlobalTag(process.GlobalTag,'92X_upgrade2017_realistic_v7','')
+process.GlobalTag = GlobalTag(process.GlobalTag,'100X_upgrade2018_realistic_v11','')
 # process.GlobalTag = GlobalTag(process.GlobalTag,'92X_upgrade2017_TSG_For90XSamples_V1','')
 # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalLUTCorrsTags2009
-process.GlobalTag.toGet = cms.VPSet(
-  cms.PSet(record = cms.string("HcalLUTCorrsRcd"),
-           tag = cms.string("HcalLUTCorrs_2017plan1_v2.0_mc"),
-           # tag = cms.string("HcalLUTCorrs_2017plan1_v1.0_mc"),
-           connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
-          )
-)
+# process.GlobalTag.toGet = cms.VPSet(
+#   cms.PSet(record = cms.string("HcalLUTCorrsRcd"),
+#            tag = cms.string("HcalLUTCorrs_2018_v3.0_mc"),
+#            # tag = cms.string("HcalLUTCorrs_2017plan1_v2.0_mc"),
+#            connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+#           )
+# )
 
 ## To get the CaloTPGTranscoder, which decodes the HCAL compression LUT
 process.load("SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff")
 # From an email by Aleko: "For simulation you want LUTGenerationMode=True"
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(True)
 
-from CondCore.DBCommon.CondDBSetup_cfi import *
-process.es_pool = cms.ESSource("PoolDBESSource",
-     CondDBSetup,
-     timetype = cms.string('runnumber'),
-     toGet = cms.VPSet(
-         cms.PSet(record = cms.string("HcalLutMetadataRcd"),
-             # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalLutMetadataTags2011
-             tag = cms.string("HcalLutMetadata_2017plan1_v3.0_mc")
-             ),
-         cms.PSet(record = cms.string("HcalElectronicsMapRcd"),
-             # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalElectronicsMapTags2009
-             tag = cms.string("HcalElectronicsMap_2017plan1_v3.0_mc")
-             )
-         ),
-     connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS'),
-     authenticationMethod = cms.untracked.uint32(0)
-     )
-process.es_prefer_es_pool = cms.ESPrefer( "PoolDBESSource", "es_pool" )
+# from CondCore.DBCommon.CondDBSetup_cfi import *
+# process.es_pool = cms.ESSource("PoolDBESSource",
+#      CondDBSetup,
+#      timetype = cms.string('runnumber'),
+#      toGet = cms.VPSet(
+#          cms.PSet(record = cms.string("HcalLutMetadataRcd"),
+#              # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalLutMetadataTags2011
+#              tag = cms.string("HcalLutMetadata_2018_v6.0_mc")
+#              # tag = cms.string("HcalLutMetadata_2018_v4.0_mc")
+#              ),
+#          cms.PSet(record = cms.string("HcalElectronicsMapRcd"),
+#              # Get updated tag from https://twiki.cern.ch/twiki/bin/view/CMS/HcalElectronicsMapTags2009
+#              tag = cms.string("HcalElectronicsMap_2018_v3.0_mc")
+#              # tag = cms.string("HcalElectronicsMap_2017plan1_v3.0_mc")
+#              )
+#          ),
+#      connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS'),
+#      authenticationMethod = cms.untracked.uint32(0)
+#      )
+# process.es_prefer_es_pool = cms.ESPrefer( "PoolDBESSource", "es_pool" )
 
 process.TFileService = cms.Service("TFileService",
         closeFileFast = cms.untracked.bool(True),

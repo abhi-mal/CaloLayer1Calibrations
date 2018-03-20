@@ -411,6 +411,8 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 		l1_summed55_h_=0;
 		sumCorr_h_=0;
 		
+		l1_square55_e_.clear();
+		l1_square55_h_.clear();
 		for(unsigned int i = 0; i < 5; i++){
 			vector<double> blank_e;
 			blank_e.clear();
@@ -469,8 +471,8 @@ PionCalibrations::analyze(const edm::Event& event, const edm::EventSetup& setup)
 				if (tpgsquarephi==76) {tpgsquarephi=4;}
 				if (tpgsquareeta>55 || tpgsquareeta<0) {continue;}//No Eta values beyond FIX ME IN NEXT ITERATION
 				
-				l1_square55_e_[i+2][j+2] = eTowerETCode[tpgsquarephi][tpgsquareeta]*0.5;
-				l1_square55_h_[i+2][j+2] = hTowerETCode[tpgsquarephi][tpgsquareeta]*0.5;
+				l1_square55_e_[j+2][i+2] = eTowerETCode[tpgsquarephi][tpgsquareeta]*0.5;
+				l1_square55_h_[j+2][i+2] = hTowerETCode[tpgsquarephi][tpgsquareeta]*0.5;
 				
 				if (j == 0 && i == 0)
 				{
