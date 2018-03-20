@@ -9,7 +9,7 @@ fi
 
 farmoutAnalysisJobs $1 \
   --infer-cmssw-path \
-  --input-dbs-path=/SinglePion_PT200to500/RunIISpring16DR80-NoPURAW_NZS_withHLT_80X_mcRun2_asymptotic_v14-v1/GEN-SIM-RAW \
+  --input-dbs-path=/SinglePion_PT0to200/RunIISpring18DR-NZSNoPU_100X_upgrade2018_realistic_v10-v1/GEN-SIM-RAW \
   --assume-input-files-exist \
   ./piMinus_submit_cfg.py  \
   'inputFiles=$inputFileNames' 'outputFile=$outputFileName'
