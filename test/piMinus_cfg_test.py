@@ -25,8 +25,8 @@ process.load('Configuration.Geometry.GeometryRecoDB_cff')
 
 process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring(
-        $inputFileNames
-               )
+'/store/mc/RunIISummer17DRStdmix/SinglePion_PT0to200/GEN-SIM-RAW/NZSNoPU_92X_upgrade2017_realistic_v10-v2/10000/004AC23F-DC9D-E711-8B11-0025904C6216.root'
+        )
 )
 process.options   = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
@@ -72,7 +72,7 @@ process.es_prefer_es_pool = cms.ESPrefer( "PoolDBESSource", "es_pool" )
 
 process.TFileService = cms.Service("TFileService",
         closeFileFast = cms.untracked.bool(True),
-        fileName = cms.string("$outputFileName")
+        fileName = cms.string('analyzePion.root')
 )
 
 # process.simHcalTriggerPrimitiveDigis.inputLabel = cms.VInputTag(cms.InputTag('simHcalUnsuppressedDigis'), cms.InputTag('simHcalUnsuppressedDigis'))

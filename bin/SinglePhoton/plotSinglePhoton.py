@@ -37,7 +37,7 @@ suffix = argv[3]
 ntuple_file = ROOT.TFile(infile)
 
 ######## LABEL & SAVE WHERE #########
-saveWhere='/nfs_scratch/jjbuchanan/calibrations_Jan2017/MonteCarlo/CMSSW_9_2_0/src/L1Trigger/LauraTriggerTools/bin/SinglePhoton/'
+saveWhere='/nfs_scratch/jjbuchanan/calibrations_Jan2017/MonteCarlo/CMSSW_9_2_8/src/L1Trigger/CaloLayer1Calibrations/bin/SinglePhoton/'
 text_file = open("ecalcalibs_MC_"+suffix+"_all.txt","w")
 
 def GetMedian(histo):
@@ -262,10 +262,57 @@ for ETbin in range(0,13):
         histos_isolation_ETbin_phi_barrel_3x3[ETbin].SetBinError(phi+1,MeanError_isolation_3x3)
         histos_isolation_ETbin_phi_barrel_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
         histos_isolation_ETbin_phi_barrel_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
-        Mean_scaleFactor_3x3 =histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetMean()
-        MeanError_scaleFactor_3x3 =histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetMeanError()
         Mean_scaleFactor_5x5 =histos_scaleFactor_phi_barrel_5x5[ETbin][phi].GetMean()
         MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_barrel_5x5[ETbin][phi].GetMeanError()
+        ###################################################################################################
+        ### Mode ###
+        # rms = histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetRMS()
+        # if rms > 0.2:
+        #   histos_scaleFactor_phi_barrel_3x3[ETbin][phi].Rebin(2)
+        #   rms = histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetRMS()
+        # tf1 = ROOT.TF1("landaugausfunction", ROOT.langaufun, 0, 5, 4)
+        # peakpos = histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetXaxis().GetBinCenter(histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetMaximumBin())
+        # startwidth = rms / 5.0
+        # startmpv = peakpos
+        # startnorm = histos_scaleFactor_phi_barrel_3x3[ETbin][phi].Integral()
+        # startsigma = rms / 10.0
+        # tf1.SetParNames("LandauWidth","LandauMPV","Normalisation","GaussianSigma")
+        # tf1.SetParameters(startwidth, startmpv, startnorm, startsigma)
+        # histos_scaleFactor_phi_barrel_3x3[ETbin][phi].Fit(tf1, "0L", "", 0.6, 3.0)
+        # Mean_scaleFactor_3x3 = float(tf1.GetParameter(1))
+        # MeanError_scaleFactor_3x3 = float(tf1.GetParError(1))
+        # if math.isnan(Mean_scaleFactor_3x3) or math.isnan(MeanError_scaleFactor_3x3):
+        #   Mean_scaleFactor_3x3 = -9999.9
+        #   MeanError_scaleFactor_3x3 = 999.9
+        # if float(tf1.GetParameter(0))/float(tf1.GetParameter(3)) < 0.034 or float(MeanError_scaleFactor_3x3) > 0.03:
+        #   tf1_alt = ROOT.TF1("gaus","[2]*TMath::Gaus(x,[0],[1])",0.0,3.0)
+        #   startmean = peakpos
+        #   startsigma = histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetRMS()
+        #   startnorm = histos_scaleFactor_phi_barrel_3x3[ETbin][phi].Integral(histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetXaxis().FindBin(0.6),histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetXaxis().FindBin(3.0))
+        #   tf1_alt.SetParNames("GausMean","GausSigma","GausNorm")
+        #   tf1_alt.SetParameters(startmean,startsigma,startnorm)
+        #   histos_scaleFactor_phi_barrel_3x3[ETbin][phi].Fit(tf1_alt,"0L","",startmean-0.2,startmean+0.2)
+        #   val = float(tf1_alt.GetParameter(0))
+        #   err = float(tf1_alt.GetParError(0))
+        #   # if err < MeanError_scaleFactor_3x3 and not math.isnan(val) and not math.isnan(err):
+        #   if (abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos) or (MeanError_scaleFactor_3x3 > 0.05 and err < MeanError_scaleFactor_3x3)) and not math.isnan(val) and not math.isnan(err):
+        #     Mean_scaleFactor_3x3 = val
+        #     MeanError_scaleFactor_3x3 = err
+        #     tf1 = tf1_alt
+        #     # Try alternate fit range
+        #     tf1_alt.SetParameters(startmean,startsigma,startnorm)
+        #     histos_scaleFactor_phi_barrel_3x3[ETbin][phi].Fit(tf1_alt,"0L","",startmean-rms,startmean+rms)
+        #     val = float(tf1_alt.GetParameter(0))
+        #     err = float(tf1_alt.GetParError(0))
+        #     if err < MeanError_scaleFactor_3x3 and not math.isnan(val) and not math.isnan(err):
+        #       Mean_scaleFactor_3x3 = val
+        #       MeanError_scaleFactor_3x3 = err
+        #       tf1 = tf1_alt
+        ###################################################################################################
+        ### Mean ###
+        Mean_scaleFactor_3x3 =histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetMean()
+        MeanError_scaleFactor_3x3 =histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetMeanError()
+        ###################################################################################################
         histos_scaleFactor_ETbin_phi_barrel_3x3[ETbin].SetBinContent(phi+1,Mean_scaleFactor_3x3)
         histos_scaleFactor_ETbin_phi_barrel_3x3[ETbin].SetBinError(phi+1,MeanError_scaleFactor_3x3)
         histos_scaleFactor_ETbin_phi_barrel_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
@@ -279,10 +326,57 @@ for ETbin in range(0,13):
         histos_isolation_ETbin_phi_endcap_3x3[ETbin].SetBinError(phi+1,MeanError_isolation_3x3)
         histos_isolation_ETbin_phi_endcap_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
         histos_isolation_ETbin_phi_endcap_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
-        Mean_scaleFactor_3x3 =histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetMean()
-        MeanError_scaleFactor_3x3 =histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetMeanError()
         Mean_scaleFactor_5x5 =histos_scaleFactor_phi_endcap_5x5[ETbin][phi].GetMean()
         MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_endcap_5x5[ETbin][phi].GetMeanError()
+        ###################################################################################################
+        ### Mode ###
+        # rms = histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetRMS()
+        # if rms > 0.2:
+        #   histos_scaleFactor_phi_endcap_3x3[ETbin][phi].Rebin(2)
+        #   rms = histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetRMS()
+        # tf1 = ROOT.TF1("landaugausfunction", ROOT.langaufun, 0, 5, 4)
+        # peakpos = histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetXaxis().GetBinCenter(histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetMaximumBin())
+        # startwidth = rms / 5.0
+        # startmpv = peakpos
+        # startnorm = histos_scaleFactor_phi_endcap_3x3[ETbin][phi].Integral()
+        # startsigma = rms / 10.0
+        # tf1.SetParNames("LandauWidth","LandauMPV","Normalisation","GaussianSigma")
+        # tf1.SetParameters(startwidth, startmpv, startnorm, startsigma)
+        # histos_scaleFactor_phi_endcap_3x3[ETbin][phi].Fit(tf1, "0L", "", 0.6, 3.0)
+        # Mean_scaleFactor_3x3 = float(tf1.GetParameter(1))
+        # MeanError_scaleFactor_3x3 = float(tf1.GetParError(1))
+        # if math.isnan(Mean_scaleFactor_3x3) or math.isnan(MeanError_scaleFactor_3x3):
+        #   Mean_scaleFactor_3x3 = -9999.9
+        #   MeanError_scaleFactor_3x3 = 999.9
+        # if float(tf1.GetParameter(0))/float(tf1.GetParameter(3)) < 0.034 or float(MeanError_scaleFactor_3x3) > 0.03:
+        #   tf1_alt = ROOT.TF1("gaus","[2]*TMath::Gaus(x,[0],[1])",0.0,3.0)
+        #   startmean = peakpos
+        #   startsigma = histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetRMS()
+        #   startnorm = histos_scaleFactor_phi_endcap_3x3[ETbin][phi].Integral(histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetXaxis().FindBin(0.6),histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetXaxis().FindBin(3.0))
+        #   tf1_alt.SetParNames("GausMean","GausSigma","GausNorm")
+        #   tf1_alt.SetParameters(startmean,startsigma,startnorm)
+        #   histos_scaleFactor_phi_endcap_3x3[ETbin][phi].Fit(tf1_alt,"0L","",startmean-0.2,startmean+0.2)
+        #   val = float(tf1_alt.GetParameter(0))
+        #   err = float(tf1_alt.GetParError(0))
+        #   # if err < MeanError_scaleFactor_3x3 and not math.isnan(val) and not math.isnan(err):
+        #   if (abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos) or (MeanError_scaleFactor_3x3 > 0.05 and err < MeanError_scaleFactor_3x3)) and not math.isnan(val) and not math.isnan(err):
+        #     Mean_scaleFactor_3x3 = val
+        #     MeanError_scaleFactor_3x3 = err
+        #     tf1 = tf1_alt
+        #     # Try alternate fit range
+        #     tf1_alt.SetParameters(startmean,startsigma,startnorm)
+        #     histos_scaleFactor_phi_endcap_3x3[ETbin][phi].Fit(tf1_alt,"0L","",startmean-rms,startmean+rms)
+        #     val = float(tf1_alt.GetParameter(0))
+        #     err = float(tf1_alt.GetParError(0))
+        #     if err < MeanError_scaleFactor_3x3 and not math.isnan(val) and not math.isnan(err):
+        #       Mean_scaleFactor_3x3 = val
+        #       MeanError_scaleFactor_3x3 = err
+        #       tf1 = tf1_alt
+        ###################################################################################################
+        ### Mean ###
+        Mean_scaleFactor_3x3 =histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetMean()
+        MeanError_scaleFactor_3x3 =histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetMeanError()
+        ###################################################################################################
         histos_scaleFactor_ETbin_phi_endcap_3x3[ETbin].SetBinContent(phi+1,Mean_scaleFactor_3x3)
         histos_scaleFactor_ETbin_phi_endcap_3x3[ETbin].SetBinError(phi+1,MeanError_scaleFactor_3x3)
         histos_scaleFactor_ETbin_phi_endcap_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
@@ -324,7 +418,7 @@ for ETbin in range(0,13):
         histos_isolation_ETbin_foldedEta_5x5[ETbin].SetBinContent(foldedEta+1,Mean_isolation_5x5)
         histos_isolation_ETbin_foldedEta_5x5[ETbin].SetBinError(foldedEta+1,MeanError_isolation_5x5)
         #############################################################################################
-        ### Mode ###
+        # ### Mode ###
         rms = histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetRMS()
         if rms > 0.2:
           histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Rebin(2)
@@ -358,34 +452,43 @@ for ETbin in range(0,13):
             Mean_scaleFactor_3x3 = val
             MeanError_scaleFactor_3x3 = err
             tf1 = tf1_alt
-            # Try alternate fit range
-            tf1_alt.SetParameters(startmean,startsigma,startnorm)
-            histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Fit(tf1_alt,"0L","",startmean-rms,startmean+rms)
-            val = float(tf1_alt.GetParameter(0))
-            err = float(tf1_alt.GetParError(0))
-            if err < MeanError_scaleFactor_3x3 and not math.isnan(val) and not math.isnan(err):
-              Mean_scaleFactor_3x3 = val
-              MeanError_scaleFactor_3x3 = err
-              tf1 = tf1_alt
-        sf_errors.append('ETbin:%d, foldedEta:%d, err:%f'%(ETbin,foldedEta,MeanError_scaleFactor_3x3))
+          # Try alternate fit range
+          tf1_alt.SetParameters(startmean,startsigma,startnorm)
+          histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Fit(tf1_alt,"0L","",startmean-rms,startmean+rms)
+          val = float(tf1_alt.GetParameter(0))
+          err = float(tf1_alt.GetParError(0))
+          if (abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos) or (MeanError_scaleFactor_3x3 > 0.05 and err < MeanError_scaleFactor_3x3)) and not math.isnan(val) and not math.isnan(err):
+            Mean_scaleFactor_3x3 = val
+            MeanError_scaleFactor_3x3 = err
+            tf1 = tf1_alt
+        # sf_errors.append('ETbin:%d, foldedEta:%d, err:%f'%(ETbin,foldedEta,MeanError_scaleFactor_3x3))
         ### Draw mode plots ###
+        histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].SetLineColor(ROOT.kBlack)
+        histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].SetLineWidth(2)
+        histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetXaxis().SetTitle("Gen. Photon pT / 3x3 ECAL ET")
+        histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetYaxis().SetTitle("Events / bin")
+        hist_title = 'ETbin = %d, |ieta| = %d' % (ETbin,foldedEta+1)
+        histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].SetTitle(hist_title)
+        tf1.Draw()
+        tf1.SetLineColor(ROOT.kRed)
+        tf1.SetLineWidth(2)
+        histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Draw("HIST")
+        tf1.Draw("SAME")
+        saveas='%sphoton_SF_hist_ETbin%s_ieta%s_%s.png' % (saveWhere,ETbin,foldedEta+1,suffix)
+        canvas.SaveAs(saveas)
+        #############################################################################################
+        ### Mean ###
+        # Mean_scaleFactor_3x3 =histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetMean()
+        # MeanError_scaleFactor_3x3 =histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetMeanError()
         # histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].SetLineColor(ROOT.kBlack)
         # histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].SetLineWidth(2)
         # histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetXaxis().SetTitle("Gen. Photon pT / 3x3 ECAL ET")
         # histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetYaxis().SetTitle("Events / bin")
         # hist_title = 'ETbin = %d, |ieta| = %d' % (ETbin,foldedEta+1)
         # histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].SetTitle(hist_title)
-        # tf1.Draw()
-        # tf1.SetLineColor(ROOT.kRed)
-        # tf1.SetLineWidth(2)
         # histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Draw("HIST")
-        # tf1.Draw("SAME")
         # saveas='%sphoton_SF_hist_ETbin%s_ieta%s_%s.png' % (saveWhere,ETbin,foldedEta+1,suffix)
         # canvas.SaveAs(saveas)
-        #############################################################################################
-        ### Mean ###
-        # Mean_scaleFactor_3x3 =histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetMean()
-        # MeanError_scaleFactor_3x3 =histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetMeanError()
         #############################################################################################
         Mean_scaleFactor_5x5 =histos_scaleFactor_eta_folded_5x5[ETbin][foldedEta].GetMean()
         MeanError_scaleFactor_5x5 =histos_scaleFactor_eta_folded_5x5[ETbin][foldedEta].GetMeanError()
