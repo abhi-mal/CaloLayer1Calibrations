@@ -37,7 +37,8 @@ suffix = argv[3]
 ntuple_file = ROOT.TFile(infile)
 
 ######## LABEL & SAVE WHERE #########
-saveWhere='/nfs_scratch/jjbuchanan/calibrations_Jan2017/MonteCarlo/CMSSW_9_2_8/src/L1Trigger/CaloLayer1Calibrations/bin/SinglePhoton/'
+# saveWhere='/nfs_scratch/jjbuchanan/calibrations_Jan2017/MonteCarlo/CMSSW_9_2_8/src/L1Trigger/CaloLayer1Calibrations/bin/SinglePhoton/'
+saveWhere=''
 text_file = open("ecalcalibs_MC_"+suffix+"_all.txt","w")
 
 def GetMedian(histo):
@@ -60,210 +61,208 @@ def GetMedian(histo):
 #####################################
 
 histos_resolution_3x3 = []
-histos_resolution_5x5 = []
+# histos_resolution_5x5 = []
 histos_genpt_3x3 = []
-histos_genpt_5x5 = []
+# histos_genpt_5x5 = []
 histos_summed33e_3x3 = []
-histos_summed33e_5x5 = []
+# histos_summed33e_5x5 = []
 histos_summed55e_3x3 = []
-histos_summed55e_5x5 = []
+# histos_summed55e_5x5 = []
 histos_isolation_ETbin_phi_3x3 = []
-histos_isolation_ETbin_phi_5x5 = []
+# histos_isolation_ETbin_phi_5x5 = []
 histos_isolation_ETbin_phi_barrel_3x3 = []
-histos_isolation_ETbin_phi_barrel_5x5 = []
+# histos_isolation_ETbin_phi_barrel_5x5 = []
 histos_isolation_ETbin_phi_endcap_3x3 = []
-histos_isolation_ETbin_phi_endcap_5x5 = []
+# histos_isolation_ETbin_phi_endcap_5x5 = []
 histos_isolation_ETbin_eta_3x3 = []
-histos_isolation_ETbin_eta_5x5 = []
+# histos_isolation_ETbin_eta_5x5 = []
 histos_isolation_ETbin_foldedEta_3x3 = []
-histos_isolation_ETbin_foldedEta_5x5 = []
+# histos_isolation_ETbin_foldedEta_5x5 = []
 histos_isolation_phi_3x3 = []
-histos_isolation_phi_5x5 = []
+# histos_isolation_phi_5x5 = []
 histos_isolation_phi_barrel_3x3 = []
-histos_isolation_phi_barrel_5x5 = []
+# histos_isolation_phi_barrel_5x5 = []
 histos_isolation_phi_endcap_3x3 = []
-histos_isolation_phi_endcap_5x5 = []
+# histos_isolation_phi_endcap_5x5 = []
 histos_isolation_eta_3x3 = []
-histos_isolation_eta_5x5 = []
+# histos_isolation_eta_5x5 = []
 histos_isolation_eta_folded_3x3 = []
-histos_isolation_eta_folded_5x5 = []
+# histos_isolation_eta_folded_5x5 = []
 histos_scaleFactor_ETbin_phi_3x3 = []
-histos_scaleFactor_ETbin_phi_5x5 = []
+# histos_scaleFactor_ETbin_phi_5x5 = []
 histos_scaleFactor_ETbin_phi_barrel_3x3 = []
-histos_scaleFactor_ETbin_phi_barrel_5x5 = []
+# histos_scaleFactor_ETbin_phi_barrel_5x5 = []
 histos_scaleFactor_ETbin_phi_endcap_3x3 = []
-histos_scaleFactor_ETbin_phi_endcap_5x5 = []
+# histos_scaleFactor_ETbin_phi_endcap_5x5 = []
 histos_scaleFactor_ETbin_eta_3x3 = []
-histos_scaleFactor_ETbin_eta_5x5 = []
+# histos_scaleFactor_ETbin_eta_5x5 = []
 histos_scaleFactor_ETbin_foldedEta_3x3 = []
-histos_scaleFactor_ETbin_foldedEta_5x5 = []
+# histos_scaleFactor_ETbin_foldedEta_5x5 = []
 histos_scaleFactor_phi_3x3 = []
-histos_scaleFactor_phi_5x5 = []
+# histos_scaleFactor_phi_5x5 = []
 histos_scaleFactor_phi_barrel_3x3 = []
-histos_scaleFactor_phi_barrel_5x5 = []
+# histos_scaleFactor_phi_barrel_5x5 = []
 histos_scaleFactor_phi_endcap_3x3 = []
-histos_scaleFactor_phi_endcap_5x5 = []
+# histos_scaleFactor_phi_endcap_5x5 = []
 histos_scaleFactor_eta_3x3 = []
-histos_scaleFactor_eta_5x5 = []
+# histos_scaleFactor_eta_5x5 = []
 histos_scaleFactor_eta_folded_3x3 = []
-histos_scaleFactor_eta_folded_5x5 = []
+# histos_scaleFactor_eta_folded_5x5 = []
 for i in range(0,14):
   hname_resolution_3x3 = "histos_resolution_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_resolution_3x3.append(ROOT.TH1F(hname_resolution_3x3,"",100,-1,4))
-  hname_resolution_5x5 = "histos_resolution_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_resolution_5x5.append(ROOT.TH1F(hname_resolution_5x5,"",100,-1,4))
+  # hname_resolution_5x5 = "histos_resolution_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_resolution_5x5.append(ROOT.TH1F(hname_resolution_5x5,"",100,-1,4))
   hname_genpt_3x3 = "histos_genpt_3x3_ETbin%d" % i
   histos_genpt_3x3.append(ROOT.TH1F(hname_genpt_3x3,"",200,0,200))
-  hname_genpt_5x5 = "histos_genpt_5x5_ETbin%d" % i
-  histos_genpt_5x5.append(ROOT.TH1F(hname_genpt_5x5,"",200,0,200))
+  # hname_genpt_5x5 = "histos_genpt_5x5_ETbin%d" % i
+  # histos_genpt_5x5.append(ROOT.TH1F(hname_genpt_5x5,"",200,0,200))
   hname_summed33e_3x3 = "histos_summed33e_3x3_ETbin%d" % i
   histos_summed33e_3x3.append(ROOT.TH1F(hname_summed33e_3x3,"",200,0,200))
-  hname_summed33e_5x5 = "histos_summed33e_5x5_ETbin%d" % i
-  histos_summed33e_5x5.append(ROOT.TH1F(hname_summed33e_5x5,"",200,0,200))
+  # hname_summed33e_5x5 = "histos_summed33e_5x5_ETbin%d" % i
+  # histos_summed33e_5x5.append(ROOT.TH1F(hname_summed33e_5x5,"",200,0,200))
   hname_summed55e_3x3 = "histos_summed55e_3x3_ETbin%d" % i
   histos_summed55e_3x3.append(ROOT.TH1F(hname_summed55e_3x3,"",200,0,200))
-  hname_summed55e_5x5 = "histos_summed55e_5x5_ETbin%d" % i
-  histos_summed55e_5x5.append(ROOT.TH1F(hname_summed55e_5x5,"",200,0,200))
+  # hname_summed55e_5x5 = "histos_summed55e_5x5_ETbin%d" % i
+  # histos_summed55e_5x5.append(ROOT.TH1F(hname_summed55e_5x5,"",200,0,200))
   hname_isolation_ETbin_phi_3x3 = "histos_isolation_phi_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_isolation_ETbin_phi_3x3.append(ROOT.TH1F(hname_isolation_ETbin_phi_3x3,"",72,0,72))
-  hname_isolation_ETbin_phi_5x5 = "histos_isolation_phi_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_isolation_ETbin_phi_5x5.append(ROOT.TH1F(hname_isolation_ETbin_phi_5x5,"",72,0,72))
+  # hname_isolation_ETbin_phi_5x5 = "histos_isolation_phi_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_isolation_ETbin_phi_5x5.append(ROOT.TH1F(hname_isolation_ETbin_phi_5x5,"",72,0,72))
   hname_isolation_ETbin_phi_barrel_3x3 = "histos_isolation_phi_barrel_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_isolation_ETbin_phi_barrel_3x3.append(ROOT.TH1F(hname_isolation_ETbin_phi_barrel_3x3,"",72,0,72))
-  hname_isolation_ETbin_phi_barrel_5x5 = "histos_isolation_phi_barrel_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_isolation_ETbin_phi_barrel_5x5.append(ROOT.TH1F(hname_isolation_ETbin_phi_barrel_5x5,"",72,0,72))
+  # hname_isolation_ETbin_phi_barrel_5x5 = "histos_isolation_phi_barrel_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_isolation_ETbin_phi_barrel_5x5.append(ROOT.TH1F(hname_isolation_ETbin_phi_barrel_5x5,"",72,0,72))
   hname_isolation_ETbin_phi_endcap_3x3 = "histos_isolation_phi_endcap_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_isolation_ETbin_phi_endcap_3x3.append(ROOT.TH1F(hname_isolation_ETbin_phi_endcap_3x3,"",72,0,72))
-  hname_isolation_ETbin_phi_endcap_5x5 = "histos_isolation_phi_endcap_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_isolation_ETbin_phi_endcap_5x5.append(ROOT.TH1F(hname_isolation_ETbin_phi_endcap_5x5,"",72,0,72))
+  # hname_isolation_ETbin_phi_endcap_5x5 = "histos_isolation_phi_endcap_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_isolation_ETbin_phi_endcap_5x5.append(ROOT.TH1F(hname_isolation_ETbin_phi_endcap_5x5,"",72,0,72))
   hname_isolation_ETbin_eta_3x3 = "histos_isolation_eta_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_isolation_ETbin_eta_3x3.append(ROOT.TH1F(hname_isolation_ETbin_eta_3x3,"",56,0,56))
-  hname_isolation_ETbin_eta_5x5 = "histos_isolation_eta_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_isolation_ETbin_eta_5x5.append(ROOT.TH1F(hname_isolation_ETbin_eta_5x5,"",56,0,56))
+  # hname_isolation_ETbin_eta_5x5 = "histos_isolation_eta_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_isolation_ETbin_eta_5x5.append(ROOT.TH1F(hname_isolation_ETbin_eta_5x5,"",56,0,56))
   hname_isolation_ETbin_foldedEta_3x3 = "histos_isolation_foldedEta_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_isolation_ETbin_foldedEta_3x3.append(ROOT.TH1F(hname_isolation_ETbin_foldedEta_3x3,"",28,0,28))
-  hname_isolation_ETbin_foldedEta_5x5 = "histos_isolation_foldedEta_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_isolation_ETbin_foldedEta_5x5.append(ROOT.TH1F(hname_isolation_ETbin_foldedEta_5x5,"",28,0,28))
+  # hname_isolation_ETbin_foldedEta_5x5 = "histos_isolation_foldedEta_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_isolation_ETbin_foldedEta_5x5.append(ROOT.TH1F(hname_isolation_ETbin_foldedEta_5x5,"",28,0,28))
   histos_isolation_phi_3x3.append([])
-  histos_isolation_phi_5x5.append([])
+  # histos_isolation_phi_5x5.append([])
   histos_isolation_phi_barrel_3x3.append([])
-  histos_isolation_phi_barrel_5x5.append([])
+  # histos_isolation_phi_barrel_5x5.append([])
   histos_isolation_phi_endcap_3x3.append([])
-  histos_isolation_phi_endcap_5x5.append([])
+  # histos_isolation_phi_endcap_5x5.append([])
   histos_isolation_eta_3x3.append([])
-  histos_isolation_eta_5x5.append([])
+  # histos_isolation_eta_5x5.append([])
   histos_isolation_eta_folded_3x3.append([])
-  histos_isolation_eta_folded_5x5.append([])
+  # histos_isolation_eta_folded_5x5.append([])
   hname_scaleFactor_ETbin_phi_3x3 = "histos_scaleFactor_phi_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_scaleFactor_ETbin_phi_3x3.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_3x3,"",72,0,72))
-  hname_scaleFactor_ETbin_phi_5x5 = "histos_scaleFactor_phi_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_scaleFactor_ETbin_phi_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_5x5,"",72,0,72))
+  # hname_scaleFactor_ETbin_phi_5x5 = "histos_scaleFactor_phi_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_scaleFactor_ETbin_phi_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_5x5,"",72,0,72))
   hname_scaleFactor_ETbin_phi_barrel_3x3 = "histos_scaleFactor_phi_barrel_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_scaleFactor_ETbin_phi_barrel_3x3.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_barrel_3x3,"",72,0,72))
-  hname_scaleFactor_ETbin_phi_barrel_5x5 = "histos_scaleFactor_phi_barrel_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_scaleFactor_ETbin_phi_barrel_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_barrel_5x5,"",72,0,72))
+  # hname_scaleFactor_ETbin_phi_barrel_5x5 = "histos_scaleFactor_phi_barrel_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_scaleFactor_ETbin_phi_barrel_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_barrel_5x5,"",72,0,72))
   hname_scaleFactor_ETbin_phi_endcap_3x3 = "histos_scaleFactor_phi_endcap_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_scaleFactor_ETbin_phi_endcap_3x3.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_endcap_3x3,"",72,0,72))
-  hname_scaleFactor_ETbin_phi_endcap_5x5 = "histos_scaleFactor_phi_endcap_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_scaleFactor_ETbin_phi_endcap_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_endcap_5x5,"",72,0,72))
+  # hname_scaleFactor_ETbin_phi_endcap_5x5 = "histos_scaleFactor_phi_endcap_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_scaleFactor_ETbin_phi_endcap_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_phi_endcap_5x5,"",72,0,72))
   hname_scaleFactor_ETbin_eta_3x3 = "histos_scaleFactor_eta_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_scaleFactor_ETbin_eta_3x3.append(ROOT.TH1F(hname_scaleFactor_ETbin_eta_3x3,"",56,0,56))
-  hname_scaleFactor_ETbin_eta_5x5 = "histos_scaleFactor_eta_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_scaleFactor_ETbin_eta_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_eta_5x5,"",56,0,56))
+  # hname_scaleFactor_ETbin_eta_5x5 = "histos_scaleFactor_eta_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_scaleFactor_ETbin_eta_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_eta_5x5,"",56,0,56))
   hname_scaleFactor_ETbin_foldedEta_3x3 = "histos_scaleFactor_foldedEta_3x3_ETbin%d" % i # Each histogram must have a unique name
   histos_scaleFactor_ETbin_foldedEta_3x3.append(ROOT.TH1F(hname_scaleFactor_ETbin_foldedEta_3x3,"",28,0,28))
-  hname_scaleFactor_ETbin_foldedEta_5x5 = "histos_scaleFactor_foldedEta_5x5_ETbin%d" % i # Each histogram must have a unique name
-  histos_scaleFactor_ETbin_foldedEta_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_foldedEta_5x5,"",28,0,28))
+  # hname_scaleFactor_ETbin_foldedEta_5x5 = "histos_scaleFactor_foldedEta_5x5_ETbin%d" % i # Each histogram must have a unique name
+  # histos_scaleFactor_ETbin_foldedEta_5x5.append(ROOT.TH1F(hname_scaleFactor_ETbin_foldedEta_5x5,"",28,0,28))
   histos_scaleFactor_phi_3x3.append([])
-  histos_scaleFactor_phi_5x5.append([])
+  # histos_scaleFactor_phi_5x5.append([])
   histos_scaleFactor_phi_barrel_3x3.append([])
-  histos_scaleFactor_phi_barrel_5x5.append([])
+  # histos_scaleFactor_phi_barrel_5x5.append([])
   histos_scaleFactor_phi_endcap_3x3.append([])
-  histos_scaleFactor_phi_endcap_5x5.append([])
+  # histos_scaleFactor_phi_endcap_5x5.append([])
   histos_scaleFactor_eta_3x3.append([])
-  histos_scaleFactor_eta_5x5.append([])
+  # histos_scaleFactor_eta_5x5.append([])
   histos_scaleFactor_eta_folded_3x3.append([])
-  histos_scaleFactor_eta_folded_5x5.append([])
+  # histos_scaleFactor_eta_folded_5x5.append([])
   for j in range(0,72):
     hname_isolation_phi_3x3 = "histos_isolation_phi_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_isolation_phi_3x3[i].append(ntuple_file.Get(hname_isolation_phi_3x3))
-    hname_isolation_phi_5x5 = "histos_isolation_phi_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_isolation_phi_5x5[i].append(ntuple_file.Get(hname_isolation_phi_5x5))
+    # hname_isolation_phi_5x5 = "histos_isolation_phi_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_isolation_phi_5x5[i].append(ntuple_file.Get(hname_isolation_phi_5x5))
     hname_scaleFactor_phi_3x3 = "histos_scaleFactor_phi_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_scaleFactor_phi_3x3[i].append(ntuple_file.Get(hname_scaleFactor_phi_3x3))
-    hname_scaleFactor_phi_5x5 = "histos_scaleFactor_phi_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_scaleFactor_phi_5x5[i].append(ntuple_file.Get(hname_scaleFactor_phi_5x5))
+    # hname_scaleFactor_phi_5x5 = "histos_scaleFactor_phi_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_scaleFactor_phi_5x5[i].append(ntuple_file.Get(hname_scaleFactor_phi_5x5))
     hname_isolation_phi_barrel_3x3 = "histos_isolation_phi_barrel_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_isolation_phi_barrel_3x3[i].append(ntuple_file.Get(hname_isolation_phi_barrel_3x3))
-    hname_isolation_phi_barrel_5x5 = "histos_isolation_phi_barrel_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_isolation_phi_barrel_5x5[i].append(ntuple_file.Get(hname_isolation_phi_barrel_5x5))
+    # hname_isolation_phi_barrel_5x5 = "histos_isolation_phi_barrel_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_isolation_phi_barrel_5x5[i].append(ntuple_file.Get(hname_isolation_phi_barrel_5x5))
     hname_scaleFactor_phi_barrel_3x3 = "histos_scaleFactor_phi_barrel_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_scaleFactor_phi_barrel_3x3[i].append(ntuple_file.Get(hname_scaleFactor_phi_barrel_3x3))
-    hname_scaleFactor_phi_barrel_5x5 = "histos_scaleFactor_phi_barrel_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_scaleFactor_phi_barrel_5x5[i].append(ntuple_file.Get(hname_scaleFactor_phi_barrel_5x5))
+    # hname_scaleFactor_phi_barrel_5x5 = "histos_scaleFactor_phi_barrel_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_scaleFactor_phi_barrel_5x5[i].append(ntuple_file.Get(hname_scaleFactor_phi_barrel_5x5))
     hname_isolation_phi_endcap_3x3 = "histos_isolation_phi_endcap_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_isolation_phi_endcap_3x3[i].append(ntuple_file.Get(hname_isolation_phi_endcap_3x3))
-    hname_isolation_phi_endcap_5x5 = "histos_isolation_phi_endcap_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_isolation_phi_endcap_5x5[i].append(ntuple_file.Get(hname_isolation_phi_endcap_5x5))
+    # hname_isolation_phi_endcap_5x5 = "histos_isolation_phi_endcap_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_isolation_phi_endcap_5x5[i].append(ntuple_file.Get(hname_isolation_phi_endcap_5x5))
     hname_scaleFactor_phi_endcap_3x3 = "histos_scaleFactor_phi_endcap_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_scaleFactor_phi_endcap_3x3[i].append(ntuple_file.Get(hname_scaleFactor_phi_endcap_3x3))
-    hname_scaleFactor_phi_endcap_5x5 = "histos_scaleFactor_phi_endcap_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_scaleFactor_phi_endcap_5x5[i].append(ntuple_file.Get(hname_scaleFactor_phi_endcap_5x5))
+    # hname_scaleFactor_phi_endcap_5x5 = "histos_scaleFactor_phi_endcap_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_scaleFactor_phi_endcap_5x5[i].append(ntuple_file.Get(hname_scaleFactor_phi_endcap_5x5))
   for j in range(0,56):
     hname_isolation_eta_3x3 = "histos_isolation_eta_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_isolation_eta_3x3[i].append(ntuple_file.Get(hname_isolation_eta_3x3))
-    hname_isolation_eta_5x5 = "histos_isolation_eta_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_isolation_eta_5x5[i].append(ntuple_file.Get(hname_isolation_eta_5x5))
+    # hname_isolation_eta_5x5 = "histos_isolation_eta_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_isolation_eta_5x5[i].append(ntuple_file.Get(hname_isolation_eta_5x5))
     hname_scaleFactor_eta_3x3 = "histos_scaleFactor_eta_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_scaleFactor_eta_3x3[i].append(ntuple_file.Get(hname_scaleFactor_eta_3x3))
-    hname_scaleFactor_eta_5x5 = "histos_scaleFactor_eta_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_scaleFactor_eta_5x5[i].append(ntuple_file.Get(hname_scaleFactor_eta_5x5))
+    # hname_scaleFactor_eta_5x5 = "histos_scaleFactor_eta_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_scaleFactor_eta_5x5[i].append(ntuple_file.Get(hname_scaleFactor_eta_5x5))
   for j in range(0,28):
     hname_isolation_eta_folded_3x3 = "histos_isolation_eta_folded_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_isolation_eta_folded_3x3[i].append(ntuple_file.Get(hname_isolation_eta_folded_3x3))
-    hname_isolation_eta_folded_5x5 = "histos_isolation_eta_folded_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_isolation_eta_folded_5x5[i].append(ntuple_file.Get(hname_isolation_eta_folded_5x5))
+    # hname_isolation_eta_folded_5x5 = "histos_isolation_eta_folded_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_isolation_eta_folded_5x5[i].append(ntuple_file.Get(hname_isolation_eta_folded_5x5))
     hname_scaleFactor_eta_folded_3x3 = "histos_scaleFactor_eta_folded_3x3_%d_%d" % (i, j) # Each histogram must have a unique name
     histos_scaleFactor_eta_folded_3x3[i].append(ntuple_file.Get(hname_scaleFactor_eta_folded_3x3))
-    hname_scaleFactor_eta_folded_5x5 = "histos_scaleFactor_eta_folded_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
-    histos_scaleFactor_eta_folded_5x5[i].append(ntuple_file.Get(hname_scaleFactor_eta_folded_5x5))
+    # hname_scaleFactor_eta_folded_5x5 = "histos_scaleFactor_eta_folded_5x5_%d_%d" % (i, j) # Each histogram must have a unique name
+    # histos_scaleFactor_eta_folded_5x5[i].append(ntuple_file.Get(hname_scaleFactor_eta_folded_5x5))
 
 canvas = ROOT.TCanvas("asdf", "adsf", 800, 800)
 pad1 = ROOT.TPad("pad1","",0,0,1,1)
 pad1.Draw()
 pad1.cd()
 
-last_written = [1.000000]*28
-
 for ETbin in range(0,13):
     for phi in range(0,72):
         Mean_isolation_3x3 =histos_isolation_phi_3x3[ETbin][phi].GetMean()
         MeanError_isolation_3x3 =histos_isolation_phi_3x3[ETbin][phi].GetMeanError()
-        Mean_isolation_5x5 =histos_isolation_phi_5x5[ETbin][phi].GetMean()
-        MeanError_isolation_5x5 =histos_isolation_phi_5x5[ETbin][phi].GetMeanError()
+        # Mean_isolation_5x5 =histos_isolation_phi_5x5[ETbin][phi].GetMean()
+        # MeanError_isolation_5x5 =histos_isolation_phi_5x5[ETbin][phi].GetMeanError()
         histos_isolation_ETbin_phi_3x3[ETbin].SetBinContent(phi+1,Mean_isolation_3x3)
         histos_isolation_ETbin_phi_3x3[ETbin].SetBinError(phi+1,MeanError_isolation_3x3)
-        histos_isolation_ETbin_phi_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
-        histos_isolation_ETbin_phi_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
+        # histos_isolation_ETbin_phi_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
+        # histos_isolation_ETbin_phi_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
         Mean_scaleFactor_3x3 =histos_scaleFactor_phi_3x3[ETbin][phi].GetMean()
         MeanError_scaleFactor_3x3 =histos_scaleFactor_phi_3x3[ETbin][phi].GetMeanError()
-        Mean_scaleFactor_5x5 =histos_scaleFactor_phi_5x5[ETbin][phi].GetMean()
-        MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_5x5[ETbin][phi].GetMeanError()
+        # Mean_scaleFactor_5x5 =histos_scaleFactor_phi_5x5[ETbin][phi].GetMean()
+        # MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_5x5[ETbin][phi].GetMeanError()
         histos_scaleFactor_ETbin_phi_3x3[ETbin].SetBinContent(phi+1,Mean_scaleFactor_3x3)
         histos_scaleFactor_ETbin_phi_3x3[ETbin].SetBinError(phi+1,MeanError_scaleFactor_3x3)
-        histos_scaleFactor_ETbin_phi_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
-        histos_scaleFactor_ETbin_phi_5x5[ETbin].SetBinError(phi+1,MeanError_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_phi_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_phi_5x5[ETbin].SetBinError(phi+1,MeanError_scaleFactor_5x5)
         
         Mean_isolation_3x3 =histos_isolation_phi_barrel_3x3[ETbin][phi].GetMean()
         MeanError_isolation_3x3 =histos_isolation_phi_barrel_3x3[ETbin][phi].GetMeanError()
-        Mean_isolation_5x5 =histos_isolation_phi_barrel_5x5[ETbin][phi].GetMean()
-        MeanError_isolation_5x5 =histos_isolation_phi_barrel_5x5[ETbin][phi].GetMeanError()
+        # Mean_isolation_5x5 =histos_isolation_phi_barrel_5x5[ETbin][phi].GetMean()
+        # MeanError_isolation_5x5 =histos_isolation_phi_barrel_5x5[ETbin][phi].GetMeanError()
         histos_isolation_ETbin_phi_barrel_3x3[ETbin].SetBinContent(phi+1,Mean_isolation_3x3)
         histos_isolation_ETbin_phi_barrel_3x3[ETbin].SetBinError(phi+1,MeanError_isolation_3x3)
-        histos_isolation_ETbin_phi_barrel_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
-        histos_isolation_ETbin_phi_barrel_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
-        Mean_scaleFactor_5x5 =histos_scaleFactor_phi_barrel_5x5[ETbin][phi].GetMean()
-        MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_barrel_5x5[ETbin][phi].GetMeanError()
+        # histos_isolation_ETbin_phi_barrel_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
+        # histos_isolation_ETbin_phi_barrel_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
+        # Mean_scaleFactor_5x5 =histos_scaleFactor_phi_barrel_5x5[ETbin][phi].GetMean()
+        # MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_barrel_5x5[ETbin][phi].GetMeanError()
         ###################################################################################################
         ### Mode ###
         # rms = histos_scaleFactor_phi_barrel_3x3[ETbin][phi].GetRMS()
@@ -315,19 +314,19 @@ for ETbin in range(0,13):
         ###################################################################################################
         histos_scaleFactor_ETbin_phi_barrel_3x3[ETbin].SetBinContent(phi+1,Mean_scaleFactor_3x3)
         histos_scaleFactor_ETbin_phi_barrel_3x3[ETbin].SetBinError(phi+1,MeanError_scaleFactor_3x3)
-        histos_scaleFactor_ETbin_phi_barrel_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
-        histos_scaleFactor_ETbin_phi_barrel_5x5[ETbin].SetBinError(phi+1,MeanError_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_phi_barrel_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_phi_barrel_5x5[ETbin].SetBinError(phi+1,MeanError_scaleFactor_5x5)
         
         Mean_isolation_3x3 =histos_isolation_phi_endcap_3x3[ETbin][phi].GetMean()
         MeanError_isolation_3x3 =histos_isolation_phi_endcap_3x3[ETbin][phi].GetMeanError()
-        Mean_isolation_5x5 =histos_isolation_phi_endcap_5x5[ETbin][phi].GetMean()
-        MeanError_isolation_5x5 =histos_isolation_phi_endcap_5x5[ETbin][phi].GetMeanError()
+        # Mean_isolation_5x5 =histos_isolation_phi_endcap_5x5[ETbin][phi].GetMean()
+        # MeanError_isolation_5x5 =histos_isolation_phi_endcap_5x5[ETbin][phi].GetMeanError()
         histos_isolation_ETbin_phi_endcap_3x3[ETbin].SetBinContent(phi+1,Mean_isolation_3x3)
         histos_isolation_ETbin_phi_endcap_3x3[ETbin].SetBinError(phi+1,MeanError_isolation_3x3)
-        histos_isolation_ETbin_phi_endcap_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
-        histos_isolation_ETbin_phi_endcap_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
-        Mean_scaleFactor_5x5 =histos_scaleFactor_phi_endcap_5x5[ETbin][phi].GetMean()
-        MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_endcap_5x5[ETbin][phi].GetMeanError()
+        # histos_isolation_ETbin_phi_endcap_5x5[ETbin].SetBinContent(phi+1,Mean_isolation_5x5)
+        # histos_isolation_ETbin_phi_endcap_5x5[ETbin].SetBinError(phi+1,MeanError_isolation_5x5)
+        # Mean_scaleFactor_5x5 =histos_scaleFactor_phi_endcap_5x5[ETbin][phi].GetMean()
+        # MeanError_scaleFactor_5x5 =histos_scaleFactor_phi_endcap_5x5[ETbin][phi].GetMeanError()
         ###################################################################################################
         ### Mode ###
         # rms = histos_scaleFactor_phi_endcap_3x3[ETbin][phi].GetRMS()
@@ -379,30 +378,30 @@ for ETbin in range(0,13):
         ###################################################################################################
         histos_scaleFactor_ETbin_phi_endcap_3x3[ETbin].SetBinContent(phi+1,Mean_scaleFactor_3x3)
         histos_scaleFactor_ETbin_phi_endcap_3x3[ETbin].SetBinError(phi+1,MeanError_scaleFactor_3x3)
-        histos_scaleFactor_ETbin_phi_endcap_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
-        histos_scaleFactor_ETbin_phi_endcap_5x5[ETbin].SetBinError(phi+1,MeanError_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_phi_endcap_5x5[ETbin].SetBinContent(phi+1,Mean_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_phi_endcap_5x5[ETbin].SetBinError(phi+1,MeanError_scaleFactor_5x5)
     for eta in range(0,56):
         Mean_isolation_3x3 =histos_isolation_eta_3x3[ETbin][eta].GetMean()
         MeanError_isolation_3x3 =histos_isolation_eta_3x3[ETbin][eta].GetMeanError()
-        Mean_isolation_5x5 =histos_isolation_eta_5x5[ETbin][eta].GetMean()
-        MeanError_isolation_5x5 =histos_isolation_eta_5x5[ETbin][eta].GetMeanError()
+        # Mean_isolation_5x5 =histos_isolation_eta_5x5[ETbin][eta].GetMean()
+        # MeanError_isolation_5x5 =histos_isolation_eta_5x5[ETbin][eta].GetMeanError()
         histos_isolation_ETbin_eta_3x3[ETbin].SetBinContent(eta+1,Mean_isolation_3x3)
         histos_isolation_ETbin_eta_3x3[ETbin].SetBinError(eta+1,MeanError_isolation_3x3)
-        histos_isolation_ETbin_eta_5x5[ETbin].SetBinContent(eta+1,Mean_isolation_5x5)
-        histos_isolation_ETbin_eta_5x5[ETbin].SetBinError(eta+1,MeanError_isolation_5x5)
+        # histos_isolation_ETbin_eta_5x5[ETbin].SetBinContent(eta+1,Mean_isolation_5x5)
+        # histos_isolation_ETbin_eta_5x5[ETbin].SetBinError(eta+1,MeanError_isolation_5x5)
         Mean_scaleFactor_3x3 =histos_scaleFactor_eta_3x3[ETbin][eta].GetMean()
         MeanError_scaleFactor_3x3 =histos_scaleFactor_eta_3x3[ETbin][eta].GetMeanError()
-        Mean_scaleFactor_5x5 =histos_scaleFactor_eta_5x5[ETbin][eta].GetMean()
-        MeanError_scaleFactor_5x5 =histos_scaleFactor_eta_5x5[ETbin][eta].GetMeanError()
+        # Mean_scaleFactor_5x5 =histos_scaleFactor_eta_5x5[ETbin][eta].GetMean()
+        # MeanError_scaleFactor_5x5 =histos_scaleFactor_eta_5x5[ETbin][eta].GetMeanError()
         histos_scaleFactor_ETbin_eta_3x3[ETbin].SetBinContent(eta+1,Mean_scaleFactor_3x3)
         histos_scaleFactor_ETbin_eta_3x3[ETbin].SetBinError(eta+1,MeanError_scaleFactor_3x3)
-        histos_scaleFactor_ETbin_eta_5x5[ETbin].SetBinContent(eta+1,Mean_scaleFactor_5x5)
-        histos_scaleFactor_ETbin_eta_5x5[ETbin].SetBinError(eta+1,MeanError_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_eta_5x5[ETbin].SetBinContent(eta+1,Mean_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_eta_5x5[ETbin].SetBinError(eta+1,MeanError_scaleFactor_5x5)
     for foldedEta in range(0,28):
         Mean_isolation_3x3 =histos_isolation_eta_folded_3x3[ETbin][foldedEta].GetMean()
         MeanError_isolation_3x3 =histos_isolation_eta_folded_3x3[ETbin][foldedEta].GetMeanError()
-        Mean_isolation_5x5 =histos_isolation_eta_folded_5x5[ETbin][foldedEta].GetMean()
-        MeanError_isolation_5x5 =histos_isolation_eta_folded_5x5[ETbin][foldedEta].GetMeanError()
+        # Mean_isolation_5x5 =histos_isolation_eta_folded_5x5[ETbin][foldedEta].GetMean()
+        # MeanError_isolation_5x5 =histos_isolation_eta_folded_5x5[ETbin][foldedEta].GetMeanError()
         ### Draw isolation plots ###
         # histos_isolation_eta_folded_3x3[ETbin][foldedEta].SetLineColor(ROOT.kBlack)
         # histos_isolation_eta_folded_3x3[ETbin][foldedEta].SetLineWidth(2)
@@ -415,10 +414,10 @@ for ETbin in range(0,13):
         # canvas.SaveAs(saveas)
         histos_isolation_ETbin_foldedEta_3x3[ETbin].SetBinContent(foldedEta+1,Mean_isolation_3x3)
         histos_isolation_ETbin_foldedEta_3x3[ETbin].SetBinError(foldedEta+1,MeanError_isolation_3x3)
-        histos_isolation_ETbin_foldedEta_5x5[ETbin].SetBinContent(foldedEta+1,Mean_isolation_5x5)
-        histos_isolation_ETbin_foldedEta_5x5[ETbin].SetBinError(foldedEta+1,MeanError_isolation_5x5)
+        # histos_isolation_ETbin_foldedEta_5x5[ETbin].SetBinContent(foldedEta+1,Mean_isolation_5x5)
+        # histos_isolation_ETbin_foldedEta_5x5[ETbin].SetBinError(foldedEta+1,MeanError_isolation_5x5)
         #############################################################################################
-        # ### Mode ###
+        ### Mode ###
         rms = histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetRMS()
         if rms > 0.2:
           histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Rebin(2)
@@ -438,6 +437,8 @@ for ETbin in range(0,13):
           Mean_scaleFactor_3x3 = -9999.9
           MeanError_scaleFactor_3x3 = 999.9
         if float(tf1.GetParameter(0))/float(tf1.GetParameter(3)) < 0.034 or float(MeanError_scaleFactor_3x3) > 0.03:
+          Mean_scaleFactor_3x3_firstAttempt = Mean_scaleFactor_3x3
+          MeanError_scaleFactor_3x3_firstAttempt = MeanError_scaleFactor_3x3
           tf1_alt = ROOT.TF1("gaus","[2]*TMath::Gaus(x,[0],[1])",0.0,3.0)
           startmean = peakpos
           startsigma = histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].GetRMS()
@@ -448,6 +449,8 @@ for ETbin in range(0,13):
           val = float(tf1_alt.GetParameter(0))
           err = float(tf1_alt.GetParError(0))
           # if err < MeanError_scaleFactor_3x3 and not math.isnan(val) and not math.isnan(err):
+          # if abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos):
+          # if (err < MeanError_scaleFactor_3x3 and abs(val - peakpos) < (abs(Mean_scaleFactor_3x3 - peakpos)+0.005)) or (err < 0.03 and abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos)) and not math.isnan(val) and not math.isnan(err):
           if (abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos) or (MeanError_scaleFactor_3x3 > 0.05 and err < MeanError_scaleFactor_3x3)) and not math.isnan(val) and not math.isnan(err):
             Mean_scaleFactor_3x3 = val
             MeanError_scaleFactor_3x3 = err
@@ -457,10 +460,14 @@ for ETbin in range(0,13):
           histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].Fit(tf1_alt,"0L","",startmean-rms,startmean+rms)
           val = float(tf1_alt.GetParameter(0))
           err = float(tf1_alt.GetParError(0))
+          # if err < MeanError_scaleFactor_3x3 and not math.isnan(val) and not math.isnan(err):
+          # if abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos):
+          # if (err < MeanError_scaleFactor_3x3 and abs(val - peakpos) < (abs(Mean_scaleFactor_3x3 - peakpos)+0.005)) or (err < 0.03 and abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos)) and not math.isnan(val) and not math.isnan(err):
           if (abs(val - peakpos) < abs(Mean_scaleFactor_3x3 - peakpos) or (MeanError_scaleFactor_3x3 > 0.05 and err < MeanError_scaleFactor_3x3)) and not math.isnan(val) and not math.isnan(err):
             Mean_scaleFactor_3x3 = val
             MeanError_scaleFactor_3x3 = err
             tf1 = tf1_alt
+          MeanError_scaleFactor_3x3 = min(MeanError_scaleFactor_3x3, abs(Mean_scaleFactor_3x3 - Mean_scaleFactor_3x3_firstAttempt))
         # sf_errors.append('ETbin:%d, foldedEta:%d, err:%f'%(ETbin,foldedEta,MeanError_scaleFactor_3x3))
         ### Draw mode plots ###
         histos_scaleFactor_eta_folded_3x3[ETbin][foldedEta].SetLineColor(ROOT.kBlack)
@@ -490,24 +497,15 @@ for ETbin in range(0,13):
         # saveas='%sphoton_SF_hist_ETbin%s_ieta%s_%s.png' % (saveWhere,ETbin,foldedEta+1,suffix)
         # canvas.SaveAs(saveas)
         #############################################################################################
-        Mean_scaleFactor_5x5 =histos_scaleFactor_eta_folded_5x5[ETbin][foldedEta].GetMean()
-        MeanError_scaleFactor_5x5 =histos_scaleFactor_eta_folded_5x5[ETbin][foldedEta].GetMeanError()
+        # Mean_scaleFactor_5x5 =histos_scaleFactor_eta_folded_5x5[ETbin][foldedEta].GetMean()
+        # MeanError_scaleFactor_5x5 =histos_scaleFactor_eta_folded_5x5[ETbin][foldedEta].GetMeanError()
         histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].SetBinContent(foldedEta+1,Mean_scaleFactor_3x3)
         histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].SetBinError(foldedEta+1,MeanError_scaleFactor_3x3)
-        histos_scaleFactor_ETbin_foldedEta_5x5[ETbin].SetBinContent(foldedEta+1,Mean_scaleFactor_5x5)
-        histos_scaleFactor_ETbin_foldedEta_5x5[ETbin].SetBinError(foldedEta+1,MeanError_scaleFactor_5x5)
-        if ETbin == 0 and foldedEta == 0:
-            text_file.write("   float ecal[364] = {")
-        else:
-            text_file.write(", ")
-        if Mean_scaleFactor_3x3 < 1.0 or math.isnan(Mean_scaleFactor_3x3):
-            text_file.write("%f" % last_written[foldedEta])
-        else:
-            text_file.write("%f" % Mean_scaleFactor_3x3)
-            last_written[foldedEta] = Mean_scaleFactor_3x3
-        if ETbin == 12 and foldedEta == 27:
-            text_file.write("};")
+        # histos_scaleFactor_ETbin_foldedEta_5x5[ETbin].SetBinContent(foldedEta+1,Mean_scaleFactor_5x5)
+        # histos_scaleFactor_ETbin_foldedEta_5x5[ETbin].SetBinError(foldedEta+1,MeanError_scaleFactor_5x5)
 
+mean_sep_above_next_ETbin = []
+mean_for_ETbin = []
 for ETbin in range(0,13):
   histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetXaxis().SetTitle("Photon TPG iEta")
   histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetXaxis().SetRangeUser(0,28) # Eta range
@@ -519,6 +517,92 @@ for ETbin in range(0,13):
   histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].Draw("pE1")
   saveas='%sphoton_SF_%s_%s_etbin%d.png' % (saveWhere,squaresize,suffix,ETbin)
   canvas.SaveAs(saveas)
+  sum_seps_allETbins = 0.0
+  sum_values_allETbins = 0.0
+  for i in range(1,18):
+    sum_seps_allETbins += histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetBinContent(i) - histos_scaleFactor_ETbin_foldedEta_3x3[ETbin+1].GetBinContent(i)
+    sum_values_allETbins += histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetBinContent(i)
+  mean_sep_above_next_ETbin.append(sum_seps_allETbins/17.0)
+  mean_for_ETbin.append(sum_values_allETbins/17.0)
+
+n_single_flip_columns = 0
+n_complex_flip_columns = 0
+
+### Apply "minimal smoothing" to barrel
+### Look for |ieta| column in barrel with a single flip (adjacent ETbin layers switched)
+# for i in range(1,18):
+#   out_of_order_ETbins = []
+#   for ETbin in range(0,13):
+#     less_than_previous = histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetBinContent(i) <= histos_scaleFactor_ETbin_foldedEta_3x3[ETbin-1].GetBinContent(i)
+#     greater_than_next = histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetBinContent(i) >= histos_scaleFactor_ETbin_foldedEta_3x3[ETbin+1].GetBinContent(i)
+#     if (ETbin > 0 and not less_than_previous) or (ETbin < 12 and not greater_than_next):
+#       out_of_order_ETbins.append(ETbin)
+#   if len(out_of_order_ETbins) == 2 and out_of_order_ETbins[0] == out_of_order_ETbins[1]-1:
+#     n_single_flip_columns += 1
+#     # Single flip found
+#     a = 0.0
+#     if out_of_order_ETbins[0] > 0:
+#       a = histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[0]-1].GetBinContent(i)
+#     b = histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[0]].GetBinContent(i)
+#     c = histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[1]].GetBinContent(i)
+#     d = 0.0
+#     if out_of_order_ETbins[1] < 12:
+#       d = histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[1]+1].GetBinContent(i)
+#     # Check if b is farther from a or if c is farther from d, relative to the average separation at that ET
+#     b_a_dist = (a-b)/mean_sep_above_next_ETbin[out_of_order_ETbins[0]-1]
+#     c_d_dist = (c-d)/mean_sep_above_next_ETbin[out_of_order_ETbins[1]]
+#     # Edge cases:
+#     if out_of_order_ETbins[0] == 0:
+#       # The first ETbin does not tend to be too low
+#       b_a_dist = 0.0
+#     if out_of_order_ETbins[1] == 12:
+#       # There is no meaningful d, so check instead how far b and c are from their expected positions, given where a is
+#       b_a_dist = ((a-mean_sep_above_next_ETbin[out_of_order_ETbins[0]-1]) - b) / mean_sep_above_next_ETbin[out_of_order_ETbins[0]-1]
+#       c_d_dist = (c - (a-mean_sep_above_next_ETbin[out_of_order_ETbins[0]-1]-mean_sep_above_next_ETbin[out_of_order_ETbins[0]])) / mean_sep_above_next_ETbin[out_of_order_ETbins[0]]
+#     if b_a_dist > c_d_dist:
+#       # If b is farther from a, b is too low
+#       b = c + min((a-c)/2.0, mean_sep_above_next_ETbin[out_of_order_ETbins[0]])
+#       # Edge case
+#       if out_of_order_ETbins[0] == 0:
+#         b = c + mean_sep_above_next_ETbin[out_of_order_ETbins[0]]
+#       # Bin error should be no smaller than the resulting shift
+#       shift = abs(histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[0]].GetBinContent(i) - b)
+#       histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[0]].SetBinContent(i, b)
+#       histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[0]].SetBinError(i, max(shift, histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[0]].GetBinError(i)) )
+#     else:
+#       # If c is farther from d, c is too high
+#       c = d + min((b-d)/2.0, mean_sep_above_next_ETbin[out_of_order_ETbins[1]])
+#       # Edge case
+#       if out_of_order_ETbins[1] == 12:
+#         c = b - mean_sep_above_next_ETbin[out_of_order_ETbins[0]]
+#       # Bin error should be no smaller than the resulting shift
+#       shift = abs(histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[1]].GetBinContent(i) - c)
+#       histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[1]].SetBinContent(i, c)
+#       histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[1]].SetBinError(i, max(shift, histos_scaleFactor_ETbin_foldedEta_3x3[out_of_order_ETbins[1]].GetBinError(i)) )
+#   elif len(out_of_order_ETbins) > 0:
+#     n_complex_flip_columns += 1
+#     for ETbin in range(1,13): # NOT (0,13)
+#       next_bin_content = histos_scaleFactor_ETbin_foldedEta_3x3[ETbin-1].GetBinContent(i) - mean_sep_above_next_ETbin[ETbin-1]
+#       shift = abs(histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetBinContent(i) - next_bin_content)
+#       histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].SetBinContent(i, next_bin_content)
+#       histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].SetBinError(i, max(histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetBinError(i), shift))
+
+last_written = [1.000000]*28
+for ETbin in range(0,13):
+  histo = histos_scaleFactor_ETbin_foldedEta_3x3[ETbin]
+  for foldedEta in range(0,28):
+    Mean_scaleFactor_3x3 = histos_scaleFactor_ETbin_foldedEta_3x3[ETbin].GetBinContent(foldedEta+1)
+    if ETbin == 0 and foldedEta == 0:
+        text_file.write("   float ecal[364] = {")
+    else:
+        text_file.write(", ")
+    if Mean_scaleFactor_3x3 < 1.0 or math.isnan(Mean_scaleFactor_3x3):
+        text_file.write("%f" % last_written[foldedEta])
+    else:
+        text_file.write("%f" % Mean_scaleFactor_3x3)
+        last_written[foldedEta] = Mean_scaleFactor_3x3
+    if ETbin == 12 and foldedEta == 27:
+        text_file.write("};")
 
 histos_orig = []
 histos = []
@@ -648,3 +732,7 @@ legend1.AddEntry(histos[12], "70<Et<90 GeV")
 legend1.Draw("same")
 saveas='%sphoton_SF_%s_%s.png' % (saveWhere,squaresize,suffix)
 canvas.SaveAs(saveas)
+
+
+print 'n_single_flip_columns: %d' % n_single_flip_columns
+print 'n_complex_flip_columns: %d' % n_complex_flip_columns
