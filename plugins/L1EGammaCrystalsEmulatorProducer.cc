@@ -885,7 +885,8 @@ void L1EGCrystalClusterEmulatorProducer::produce(edm::Event& iEvent, const edm::
 		 }
 	     }
 	     if (cluster_list[cc][jj].cpt>0){
-		 cluster_list[cc][jj].cpt=cluster_list[cc][jj].cpt*0.963*get_calibration(cluster_list[cc][jj].cpt,cluster_list[cc][jj].ceta); //Mark's calibration as a function of eta and pt
+//		 cluster_list[cc][jj].cpt=cluster_list[cc][jj].cpt*0.963*get_calibration(cluster_list[cc][jj].cpt,cluster_list[cc][jj].ceta); //Mark's calibration as a function of eta and pt -- removing 0.963 factor,  as this was part of legacy code          
+                 cluster_list[cc][jj].cpt=cluster_list[cc][jj].cpt*get_calibration(cluster_list[cc][jj].cpt,cluster_list[cc][jj].ceta);
 	         cluster_list_merged[cc].push_back(cluster_list[cc][jj]);
 	      }
 	  }
@@ -918,7 +919,8 @@ void L1EGCrystalClusterEmulatorProducer::produce(edm::Event& iEvent, const edm::
              	      for (int ii=0; ii<17; ++ii){
 			 //Apply Mark's calibration at the same time (row of the lowest pT, as a function of eta)
             	         if ((getCrystal_etaID(hit.position.eta())/5)%17==ii){ 
-			     ECAL_tower_L1Card[jj][ii][cc]+=hit.pt()*0.963*get_calibration(0,hit.position.eta());
+//			     ECAL_tower_L1Card[jj][ii][cc]+=hit.pt()*0.963*get_calibration(0,hit.position.eta());  -- removing 0.963 factor,  as this was part of legacy code    
+                             ECAL_tower_L1Card[jj][ii][cc]+=hit.pt()*get_calibration(0,hit.position.eta());
                              iEta_tower_L1Card[jj][ii][cc]=getTower_absoluteEtaID(hit.position.eta());//hit.id.ieta();
                              iPhi_tower_L1Card[jj][ii][cc]=getTower_absolutePhiID(hit.position.phi());//hit.id.iphi();
 			 }
